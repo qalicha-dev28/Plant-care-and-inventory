@@ -2,32 +2,48 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 function PlantDetail() {
-  const { id } = useParams(); // Get the ID from the URL parameter
+  const { id } = useParams(); 
   const [plant, setPlant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const API_URL = 'http://localhost:3000/plants';
 
+  
   useEffect(() => {
-    setLoading(true);
-    fetch(`${API_URL}/${id}`)
-      .then(res => {
+    const fetchPlant = async () => {
+      setLoading(true);
+      setError(null); 
+      try {
+        const res = await fetch(`${API_URL}/${id}`);
         if (!res.ok) {
+          if (res.status === 404) {
+            setPlant(null); 
+            return; 
+         }
           throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then(data => {
+       }
+        const data = await res.json();
         setPlant(data);
-        setLoading(false);
-      })
-      .catch(err => {
+      } catch (err) {
         setError(err);
-        setLoading(false);
         console.error("Error fetching plant details:", err);
-      });
-  }, [id]); // Re-fetch if ID changes
+      } finally {
+        setLoading(false);
+      }
+   };
+
+   fetchPlant();
+  }, [id]);
+
+  
+  const formattedLastWatered = plant.last_watered
+    ? new Date(plant.last_watered).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+     })
+   : 'N/A';
 
   if (loading) return <div style={{ textAlign: 'center', padding: '20px' }}>Loading plant details...</div>;
   if (error) return <div style={{ textAlign: 'center', padding: '20px', color: 'red' }}>Error: {error.message}</div>;
@@ -65,7 +81,7 @@ function PlantDetail() {
       <img src={plant.image} alt={plant.name} style={detailImageStyle} />
       <div style={detailTextStyle}>
         <p><strong>Type:</strong> {plant.type}</p>
-        <p><strong>Last Watered:</strong> {plant.last_watered}</p>
+        <p><strong>Last Watered:</strong> {formattedLastWatered}</p>
         <p><strong>Light Requirements:</strong> {plant.light_requirements}</p>
         <p><strong>Care Notes:</strong> {plant.care_notes}</p>
       </div>

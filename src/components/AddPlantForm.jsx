@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // To redirect after submission
+import { useNavigate } from 'react-router-dom';
 
 function AddPlantForm({ onAddPlant }) {
   const navigate = useNavigate();
@@ -17,31 +17,31 @@ function AddPlantForm({ onAddPlant }) {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation (optional but good practice)
     if (!formData.name || !formData.type || !formData.image) {
       alert('Please fill in Name, Type, and Image fields.');
       return;
     }
 
-    // Assign a temporary ID (JSON Server will typically replace this)
-    // For robust optimistic updates, you might want a more unique client-side ID.
     const newPlantWithTempId = { ...formData, id: Date.now() };
 
-    onAddPlant(newPlantWithTempId); // Call parent function to add plant and update state
-
-    setFormData({ // Clear form after submission
-      name: '',
-      type: '',
-      image: '',
-      last_watered: '',
-      light_requirements: '',
-      care_notes: ''
-    });
-
-    navigate('/plants'); // Redirect to the plant list after adding
+    try {
+      await onAddPlant(newPlantWithTempId); 
+      setFormData({ 
+        name: '',
+        type: '',
+        image: '',
+        last_watered: '',
+        light_requirements: '',
+        care_notes: ''
+      });
+      navigate('/plants'); 
+    } catch (error) {
+      console.error('Error adding plant:', error);
+      alert('Failed to add plant. Please try again.'); 
+    }
   };
 
   const formStyle = {

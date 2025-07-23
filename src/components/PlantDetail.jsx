@@ -1,89 +1,123 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function PlantDetail() {
-  const { id } = useParams(); 
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [plant, setPlant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const API_URL = 'http://localhost:3000/plants';
 
-  
   useEffect(() => {
     const fetchPlant = async () => {
       setLoading(true);
-      setError(null); 
+      setError(null);
       try {
-        const res = await fetch(`${API_URL}/${id}`);
-        if (!res.ok) {
-          if (res.status === 404) {
-            setPlant(null); 
-            return; 
-         }
-          throw new Error(`HTTP error! status: ${res.status}`);
-       }
-        const data = await res.json();
+        const response = await fetch(`${API_URL}/${id}`);
+        if (!response.ok) {
+          if (response.status === 404) {
+            setPlant(null);
+            return;
+          }
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
         setPlant(data);
       } catch (err) {
-        setError(err);
         console.error("Error fetching plant details:", err);
+        setError(err);
       } finally {
         setLoading(false);
       }
-   };
+    };
 
-   fetchPlant();
+    if (id) {
+      fetchPlant();
+    }
   }, [id]);
 
-  
-  const formattedLastWatered = plant.last_watered
+  const formattedLastWatered = plant?.last_watered
     ? new Date(plant.last_watered).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-     })
-   : 'N/A';
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : 'N/A';
 
-  if (loading) return <div style={{ textAlign: 'center', padding: '20px' }}>Loading plant details...</div>;
-  if (error) return <div style={{ textAlign: 'center', padding: '20px', color: 'red' }}>Error: {error.message}</div>;
-  if (!plant) return <div style={{ textAlign: 'center', padding: '20px' }}>Plant not found.</div>;
+  if (loading) {
+    return (
+      <div className="text-center p-8 text-gray-700 text-lg">
+        Loading plant details...
+      </div>
+    );
+  }
 
-  const detailContainerStyle = {
-    maxWidth: '800px',
-    margin: '30px auto',
-    padding: '25px',
-    border: '1px solid #ddd',
-    borderRadius: '10px',
-    backgroundColor: '#f9f9f9',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  };
+  if (error) {
+    return (
+      <div className="text-center p-8 text-red-600 text-lg">
+        Error: {error.message}
+        <p className="mt-4">
+          <button
+            onClick={() => navigate('/plants')}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200"
+          >
+            Go back to Plants List
+          </button>
+        </p>
+      </div>
+    );
+  }
 
-  const detailImageStyle = {
-    maxWidth: '100%',
-    height: '300px',
-    objectFit: 'cover',
-    borderRadius: '8px',
-    marginBottom: '20px'
-  };
-
-  const detailTextStyle = {
-    textAlign: 'left',
-    width: '100%'
-  };
+  if (!plant) {
+    return (
+      <div className="text-center p-8 text-gray-600 text-lg">
+        Plant not found.
+        <p className="mt-4">
+          <button
+            onClick={() => navigate('/plants')}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200"
+          >
+            Go back to Plants List
+          </button>
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <div style={detailContainerStyle}>
-      <h2>{plant.name}</h2>
-      <img src={plant.image} alt={plant.name} style={detailImageStyle} />
-      <div style={detailTextStyle}>
-        <p><strong>Type:</strong> {plant.type}</p>
-        <p><strong>Last Watered:</strong> {formattedLastWatered}</p>
-        <p><strong>Light Requirements:</strong> {plant.light_requirements}</p>
-        <p><strong>Care Notes:</strong> {plant.care_notes}</p>
+    <div className="container mx-auto p-4 max-w-4xl bg-white rounded-lg shadow-xl mt-8">
+      <button
+        onClick={() => navigate(-1)}
+        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition-colors duration-200 mb-6"
+      >
+        &larr; Back to Plants
+      </button>
+
+      <div className="md:flex md:space-x-8">
+        <div className="md:w-1/2">
+          <img
+            src={plant.image}
+            alt={plant.name}
+            className="w-full h-auto rounded-lg shadow-md object-cover"
+          />
+        </div>
+        <div className="md:w-1/2 mt-6 md:mt-0">
+          <h2 className="text-4xl font-extrabold text-green-800 mb-4">{plant.name}</h2>
+          <p className="text-lg text-gray-700 mb-2">
+            <span className="font-semibold">Type:</span> {plant.type}
+          </p>
+          <p className="text-lg text-gray-700 mb-2">
+            <span className="font-semibold">Last Watered:</span> {formattedLastWatered}
+          </p>
+          <p className="text-lg text-gray-700 mb-2">
+            <span className="font-semibold">Light Requirements:</span> {plant.light_requirements || 'N/A'}
+          </p>
+          <p className="text-lg text-gray-700 mb-4">
+            <span className="font-semibold">Care Notes:</span> {plant.care_notes || 'No specific notes.'}
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function PlantDetail() {
+function PlantDetail({ onDeletePlant }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [plant, setPlant] = useState(null);
@@ -46,6 +46,12 @@ function PlantDetail() {
       })
     : 'N/A';
 
+  const handleDeleteClick = () => {
+    console.log(`Attempting to delete ${plant.name} (ID: ${plant.id}) from detail page.`);
+    onDeletePlant(plant.id); 
+    navigate('/plants'); 
+  };
+
   if (loading) {
     return (
       <div className="text-center p-8 text-gray-700 text-lg">
@@ -88,12 +94,28 @@ function PlantDetail() {
 
   return (
     <div className="container mx-auto p-4 max-w-4xl bg-white rounded-lg shadow-xl mt-8">
-      <button
-        onClick={() => navigate(-1)}
-        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition-colors duration-200 mb-6"
-      >
-        &larr; Back to Plants
-      </button>
+      <div className="flex justify-between items-center mb-6">
+        <button
+          onClick={() => navigate(-1)}
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition-colors duration-200"
+        >
+          &larr; Back to Plants
+        </button>
+        <div className="space-x-2">
+          <button
+            onClick={() => navigate(`/plants/${plant.id}/edit`)}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200"
+          >
+            Edit Plant
+          </button>
+          <button
+            onClick={handleDeleteClick}
+            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200"
+          >
+            Delete Plant
+          </button>
+        </div>
+      </div>
 
       <div className="md:flex md:space-x-8">
         <div className="md:w-1/2">

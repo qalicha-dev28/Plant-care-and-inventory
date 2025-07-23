@@ -1,0 +1,94 @@
+{
+  "plants": [
+    {
+      "id": 1,
+      "name": "Monstera Deliciosa",
+      "type": "Tropical",
+      "image": "https://placehold.co/400x300/a3e635/000?text=Monstera",
+      "last_watered": "2024-07-20",
+      "light_requirements": "Bright indirect light",
+      "care_notes": "Wipe leaves regularly. Allow top two inches of soil to dry out between waterings. High humidity preferred."
+    },
+    {
+      "id": 2,
+      "name": "Snake Plant (Sansevieria)",
+      "type": "Succulent",
+      "image": "https://placehold.co/400x300/84cc16/000?text=Snake+Plant",
+      "last_watered": "2024-07-05",
+      "light_requirements": "Low to bright indirect light",
+      "care_notes": "Very drought tolerant. Water sparingly, especially in winter. Avoid getting water in the rosette."
+    },
+    {
+      "id": 3,
+      "name": "Pothos (Golden)",
+      "type": "Vining",
+      "image": "https://placehold.co/400x300/65a30d/000?text=Pothos",
+      "last_watered": "2024-07-18",
+      "light_requirements": "Medium to low indirect light",
+      "care_notes": "Easy to care for. Water when leaves start to droop slightly. Can tolerate some neglect."
+    },
+    {
+      "id": 4,
+      "name": "ZZ Plant (Zamioculcas zamiifolia)",
+      "type": "Succulent",
+      "image": "https://placehold.co/400x300/4d7c0f/000?text=ZZ+Plant",
+      "last_watered": "2024-06-28",
+      "light_requirements": "Low to medium indirect light",
+      "care_notes": "Extremely drought tolerant. Water thoroughly but infrequently. Prone to root rot if overwatered."
+    },
+    {
+      "id": 5,
+      "name": "Fiddle Leaf Fig (Ficus lyrata)",
+      "type": "Tree",
+      "image": "https://placehold.co/400x300/365314/000?text=Fiddle+Leaf",
+      "last_watered": "2024-07-15",
+      "light_requirements": "Bright indirect light",
+      "care_notes": "Sensitive to changes. Water when top few inches of soil are dry. Rotate regularly for even growth."
+    },
+    {
+      "id": 6,
+      "name": "African Violet",
+      "type": "Flowering",
+      "image": "https://placehold.co/400x300/a3e635/000?text=Violet",
+      "last_watered": "2024-07-19",
+      "light_requirements": "Bright, indirect light",
+      "care_notes": "Water from the bottom. Avoid getting water on leaves to prevent spots. High humidity."
+    },
+    {
+      "id": 7,
+      "name": "Spider Plant (Chlorophytum comosum)",
+      "type": "Grass-like",
+      "image": "https://placehold.co/400x300/84cc16/000?text=Spider",
+      "last_watered": "2024-07-17",
+      "light_requirements": "Bright to moderate indirect light",
+      "care_notes": "Easy to care for. Produces 'spiderettes' that can be propagated. Tolerates some neglect."
+    },
+    {
+      "id": 8,
+      "name": "Aloe Vera",
+      "type": "Succulent",
+      "image": "https://placehold.co/400x300/65a30d/000?text=Aloe",
+      "last_watered": "2024-07-01",
+      "light_requirements": "Bright, direct to indirect light",
+      "care_notes": "Allow soil to dry completely between waterings. Use well-draining soil. Medicinal properties."
+    },
+    {
+      "id": 9,
+      "name": "Peace Lily (Spathiphyllum)",
+      "type": "Flowering",
+      "image": "https://placehold.co/400x300/4d7c0f/000?text=Peace+Lily",
+      "last_watered": "2024-07-21",
+      "light_requirements": "Low to medium indirect light",
+      "care_notes": "Will droop dramatically when thirsty. Water thoroughly. Good air purifier."
+    },
+    {
+      "id": 10,
+      "name": "Rubber Plant (Ficus elastica)",
+      "type": "Tree",
+      "image": "https://placehold.co/400x300/365314/000?text=Rubber+Plant",
+      "last_watered": "2024-07-16",
+      "light_requirements": "Bright, indirect light",
+      "care_notes": "Wipe leaves to keep them shiny. Water when the top inch or two of soil is dry. Avoid overwatering."
+    }
+  ]
+}

@@ -1,4 +1,3 @@
-// src/components/PlantCard.jsx
 import React from "react";
 import { Link } from 'react-router-dom';
 
@@ -8,10 +7,8 @@ function PlantCard({ plant, onDeletePlant }) {
     const handleDeleteClick = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        // Replaced window.confirm with console.log for demonstration.
-        // In a real app, you'd use a custom modal for confirmation.
         console.log(`Attempting to delete ${name} (ID: ${id}).`);
-        onDeletePlant(id); // Call the delete function directly
+        onDeletePlant(id); 
     };
 
     return (

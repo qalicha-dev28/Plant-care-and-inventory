@@ -8,7 +8,7 @@ function PlantDetail({ onDeletePlant }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_URL = 'http://localhost:3000/plants';
+  const API_URL = 'https://pc2-database.onrender.com/plants';
 
   useEffect(() => {
     const fetchPlant = async () => {

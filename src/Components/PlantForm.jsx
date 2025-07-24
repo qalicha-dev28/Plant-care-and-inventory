@@ -16,7 +16,7 @@ function PlantForm({ onSubmitPlant }) {
   const [loadingExisting, setLoadingExisting] = useState(false);
   const [errorExisting, setErrorExisting] = useState(null);
 
-  const API_URL = 'http://localhost:3000/plants';
+  const API_URL = 'https://pc2-database.onrender.com/plants';
   const isEditMode = !!id;
 
   useEffect(() => {

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/Navbar';
-import PlantList from './components/PlantList';
-import PlantDetail from './components/PlantDetail';
-import PlantForm from './components/PlantForm';
-import Home from './components/Home';
-import About from './components/About';
+
+import Navbar from './Components/Navbar';
+//import PlantList from './components/PlantList';
+// import PlantDetail from './components/PlantDetail';
+// import PlantForm from './components/PlantForm';
+import Home from './Components/Home';
+import About from './Components/About';
+
 
 function App() {
   const [plants, setPlants] = useState([]);
@@ -76,7 +78,8 @@ function App() {
         <main className="container mx-auto p-4 flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route
+
+            {/* <Route
               path="/plants"
               element={<PlantList plants={plants} onDeletePlant={handleDeletePlant} />}
             />
@@ -91,7 +94,8 @@ function App() {
             <Route
               path="/plants/:id/edit"
               element={<PlantForm onSubmitPlant={handleUpdatePlant} />}
-            />
+
+            /> */}
             <Route path="/about" element={<About />} />
             <Route path="*" element={<h2 className="text-center text-2xl text-gray-700 mt-10">404 - Page Not Found</h2>} />
           </Routes>

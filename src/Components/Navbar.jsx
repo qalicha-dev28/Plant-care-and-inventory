@@ -1,43 +1,27 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'
-import './index.css';
-
+import { Link } from 'react-router-dom';
 
 function Navbar() {
-  const baseLinkClasses = "px-4 py-2 rounded-full font-semibold text-sm transition-colors duration-200";
-  const defaultLinkClasses = `${baseLinkClasses} bg-green-700 text-green-100 hover:bg-green-600`;
-  const activeLinkClasses = `${baseLinkClasses} bg-green-300 text-green-900`; // Lighter green for active tab
-
   return (
-    <nav className="flex items-center justify-between p-4 bg-green-900 shadow-lg">
-      <h1 className="text-3xl font-extrabold text-green-100">
-        🪴 Tracker
-      </h1>
-      <div className="flex space-x-3">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? activeLinkClasses : defaultLinkClasses
-          }
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/plants"
-          className={({ isActive }) =>
-            isActive ? activeLinkClasses : defaultLinkClasses
-          }
-        >
-          My Plants
-        </NavLink>
-        <NavLink
-          to="/add-plant"
-          className={({ isActive }) =>
-            isActive ? activeLinkClasses : defaultLinkClasses
-          }
-        >
-          Add Plant
-        </NavLink>
+    <nav className="bg-green-700 p-4 shadow-md">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link to="/" className="text-white text-2xl font-bold hover:text-green-200 transition-colors duration-200">
+          Plant Tracker
+        </Link>
+        <div className="space-x-4">
+          <Link to="/" className="text-white hover:text-green-200 transition-colors duration-200">
+            Home
+          </Link>
+          <Link to="/plants" className="text-white hover:text-green-200 transition-colors duration-200">
+            My Plants
+          </Link>
+          <Link to="/add-plant" className="text-white hover:text-green-200 transition-colors duration-200">
+            Add New Plant
+          </Link>
+          <Link to="/about" className="text-white hover:text-green-200 transition-colors duration-200">
+            About
+          </Link>
+        </div>
       </div>
     </nav>
   );

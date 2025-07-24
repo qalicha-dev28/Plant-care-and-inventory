@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// import PlantDetail from './Components/PlantDetail';
-// import PlantForm from './components/PlantForm';
+import PlantDetail from './Components/PlantDetail';
+import PlantForm from './Components/PlantForm';
 import Home from './Components/Home';
 import About from './Components/About';
 import Navbar from './Components/Navbar';
 import PlantList from './Components/PlantLists';
 
 
-function App() {
+const App = () => {
   const [plants, setPlants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -69,8 +69,6 @@ function App() {
   if (error) {
     return <div className="text-center p-4 text-red-600">Error: {error.message}</div>;
   }
-
-const App = () => {
   return (
     <Router>
       <div className="flex flex-col min-h-screen bg-gray-50">
@@ -106,4 +104,3 @@ const App = () => {
 }
 
 export default App;
-

@@ -70,6 +70,7 @@ function App() {
     return <div className="text-center p-4 text-red-600">Error: {error.message}</div>;
   }
 
+const App = () => {
   return (
     <Router>
       <div className="flex flex-col min-h-screen bg-gray-50">
@@ -105,3 +106,4 @@ function App() {
 }
 
 export default App;
+
